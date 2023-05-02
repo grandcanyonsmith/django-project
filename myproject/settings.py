@@ -25,8 +25,13 @@ SECRET_KEY = '3xdh$yty@7*8_0+r)48lde-my5f^xh+gi%g((qo-$(!xzfb6w_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+  '096d21de-90f3-4795-abdd-b231dfd7f3c5.id.repl.co',
+  'https://django-project.grandcanyonsmit.repl.co',
+  'django-project-grandcanyonsmit.replit.app',
+  'django-project-grandcanyonsmit.replit.app',
+  '10.30.2.209',
+  'transcriptionuploaderservice.com',     'www.transcriptionuploaderservice.com']
 
 # Application definition
 
@@ -50,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+      'django.middleware.csrf.CsrfViewMiddleware',
+
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -119,6 +126,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+CSRF_COOKIE_DOMAIN = 'https://django-project-grandcanyonsmit.replit.app'
+
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+CSRF_TRUSTED_ORIGINS = ['https://django-project-grandcanyonsmit.replit.app']
+
 
 STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

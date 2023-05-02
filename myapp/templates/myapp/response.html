@@ -1,12 +1,105 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Response</title>
+    <!-- Include the Bootstrap CSS framework -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom styles -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .api-response-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .api-response {
+            padding: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .clipboard-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #6c757d;
+            cursor: pointer;
+        }
+
+        .copied-alert {
+            display: none;
+            position: absolute;
+            top: 5px;
+            right: 45px;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 5px 10px;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+    </style>
 </head>
 <body>
-    <h1>API Response</h1>
-    <pre>{{ response }}</pre>
+    <div class="container api-response-container">
+        <h1>API Response</h1>
+        <div class="api-response mt-4">
+            <pre id="response">{{ response }}</pre>
+            <i class="fas fa-clipboard clipboard-icon" onclick="copyToClipboard()"></i>
+            <div class="copied-alert" id="copiedAlert">Copied</div>
+        </div>
+    </div>
+
+    <!-- Include the Bootstrap and jQuery JavaScript libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function copyToClipboard() {
+            // Create a temporary textarea element
+            const textarea = document.createElement("textarea");
+            textarea.textContent = document.querySelector("#response").textContent;
+            textarea.style.position = "absolute";
+            textarea.style.left = "-9999px";
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            // Copy the text to the clipboard
+            document.execCommand("copy");
+
+            // Remove the temporary textarea element
+            document.body.removeChild(textarea);
+
+            // Show the 'Copied' alert
+            const copiedAlert = document.querySelector("#copiedAlert");
+            copiedAlert.style.display = "block";
+            setTimeout(() => {
+                copiedAlert.style.display = "none";
+            }, 1500);
+        }
+    </script>
 </body>
 </html>
